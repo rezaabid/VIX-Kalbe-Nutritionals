@@ -36,6 +36,7 @@ WITH Highest_total AS (
 	ORDER BY Item_total DESC
 	LIMIT 1
 )
+
 UPDATE Inventory
 SET Item_price = 70000
 WHERE Item_name IN (
@@ -47,9 +48,8 @@ WHERE Item_name IN (
 INSERT INTO Inventory (Item_code, Item_name, Item_price, Item_total)
 VALUES (2343, 'Entrostop Tablet', 9000, 20);
 /*
- Hasil dari pernyataan SQL di atas akan menghasilkan error. Hal tersebut disebabkan karena
- Item_code adalah sebagai PRIMARY KEY di tabel Inventory, sehingga Item_code harus bersifat
- unik atau tidak ada duplikasi.
+ The result of the SQL statement above will generate an error. This is because Item_code is the PRIMARY KEY
+ in the Inventory table, so Item_code must be unique or there are no duplicates.
 */
 
 -- Delete the Item_name that has the lowest number of Item_total
@@ -59,8 +59,12 @@ WITH Lowest_total AS (
 	ORDER BY Item_total ASC
 	LIMIT 1
 )
+
 DELETE FROM Inventory 
 WHERE Item_name IN (
 	SELECT Item_name
 	FROM Lowest_total
 );
+
+-- View the content of 'Inventory' table
+SELECT * FROM Inventory;
